@@ -33,10 +33,12 @@ public class ThrowsManager : MonoBehaviour
                     touchStartPos = Camera.main.ScreenToWorldPoint(new Vector3(theTouch.position.x, theTouch.position.y, 5));
                     ballControllerScript = Instantiate(ball, touchStartPos, ball.transform.rotation).GetComponent<BallController>();
                     break;
+
                 case TouchPhase.Moved:
                     touchedPos = Camera.main.ScreenToWorldPoint(new Vector3(theTouch.position.x, theTouch.position.y, 5));
                     ballControllerScript.FollowTouch(touchedPos);
                     break;
+
                 case TouchPhase.Ended:
                     touchEndPos = Camera.main.ScreenToWorldPoint(new Vector3(theTouch.position.x, theTouch.position.y, 5));
                     Vector3 swipeVector = touchEndPos - touchStartPos;
