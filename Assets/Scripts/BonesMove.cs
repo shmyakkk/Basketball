@@ -12,19 +12,15 @@ public class BonesMove : MonoBehaviour
         boneRb = GetComponent<Rigidbody>();
         startPos = transform.position;
     }
-    private void Update()
-    {
-        transform.position += Time.deltaTime * (startPos - transform.position);
-    }
     private void FixedUpdate()
     {
-        if (Mathf.Abs(transform.position.x - startPos.x) > 0.1f || Mathf.Abs(transform.position.y - startPos.y) > 0.1f)
-        {
-            boneRb.AddForce((startPos - transform.position), ForceMode.Impulse);
-        }
         if (Mathf.Abs(transform.position.x - startPos.x) > 0 || Mathf.Abs(transform.position.y - startPos.y) > 0)
         {
-            boneRb.AddForce((startPos - transform.position), ForceMode.Impulse);
+            boneRb.AddForce((startPos - transform.position) * 2, ForceMode.Impulse);
+        }
+        if (Mathf.Abs(transform.position.x - startPos.x) > 0.01 || Mathf.Abs(transform.position.y - startPos.y) > 0)
+        {
+            boneRb.AddForce((startPos - transform.position) * 2, ForceMode.Impulse);
         }
     }
 }

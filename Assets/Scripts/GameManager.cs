@@ -18,16 +18,17 @@ public class GameManager : MonoBehaviour
     private int score = 0;
 
     public static bool isStartInMainMenu;
-
+    public static float mod;
+    [SerializeField] private Material wallColor;
+    private void Awake()
+    {
+        mod = Screen.width / (float)Screen.height;
+    }
     private void Start()
     {
-        if (isStartInMainMenu)
-        {
-            Camera.main.backgroundColor = SaveDataManager.Instance.color;
-        }
         timelineScaleX = timeline.transform.localScale.x / gameTime;
         StartCoroutine(CountdownGame());
-        StartCoroutine(CountdownHoop());
+        //StartCoroutine(CountdownHoop());
     }
     private void Update()
     {
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
             timeline.transform.localScale += Time.deltaTime * timelineScaleX * Vector3.left;
         }
     }
-    IEnumerator CountdownHoop()
+    /*IEnumerator CountdownHoop()
     {
         InstantiateHoop();
         yield return new WaitForSeconds(10);
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour
 
         hoopPos = new Vector3(x, y, z);
         hoopPrefab = Instantiate(hoop, hoopPos, Quaternion.Euler(0, Random.Range(-30, 30), 0));
-    }
+    }*/
     private void GameOver()
     {
         if (isStartInMainMenu)

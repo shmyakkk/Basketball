@@ -1,17 +1,8 @@
 fileFormatVersion: 2
-guid: 1cef5229c2557ce4ebadb45ba4c87f38
+guid: 2ee49fb4088dfe848a4366cb29183357
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable:
-  - first:
-      74: 5259474102181754034
-    second: Net.001|Net.001|Net.001|Shader NodetreeAction|Net.001|Shader NodetreeAc
-  - first:
-      74: 6638010705152959173
-    second: "Net.001|Net.001|Net.001|\u0410\u0440\u043C\u0430\u0442\u0443\u0440\u0430Action|Net.001|\u0410\u0440\u043C\u0430\u0442\u0443\u0440\u0430"
-  - first:
-      74: 5187338493629588186
-    second: Net.001|Shader NodetreeAction
+  internalIDToNameTable: []
   externalObjects: {}
   materials:
     materialImportMode: 2

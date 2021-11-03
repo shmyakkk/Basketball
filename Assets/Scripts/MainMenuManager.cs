@@ -12,10 +12,9 @@ public class MainMenuManager : MonoBehaviour
         SaveDataManager.Instance.LoadData();
         bestScore.text = "Best score: " + SaveDataManager.Instance.bestScore;
     }
-    public void StartGame(Color color)
+    public void StartGame()
     {
         GameManager.isStartInMainMenu = true;
-        SaveDataManager.Instance.color = color;
         SceneManager.LoadScene(1);
     }
 }

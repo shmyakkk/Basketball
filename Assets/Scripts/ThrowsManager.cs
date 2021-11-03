@@ -43,7 +43,7 @@ public class ThrowsManager : MonoBehaviour
                     touchEndPos = Camera.main.ScreenToWorldPoint(new Vector3(theTouch.position.x, theTouch.position.y, 5));
                     Vector3 swipeVector = touchEndPos - touchStartPos;
                     //swipeVector = theTouch.deltaPosition;
-                    float v = swipeVector.magnitude / theTouch.deltaTime / 4.0f;
+                    float v = swipeVector.magnitude / theTouch.deltaTime / 3.0f;
                     ballControllerScript.MoveBall((swipeVector.normalized + Vector3.forward) * v);
                     break;
             }

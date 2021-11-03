@@ -9,6 +9,7 @@ public class BallController : MonoBehaviour
 
     void Start()
     {
+        transform.localScale *= GameManager.mod;
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         ballRb = GetComponent<Rigidbody>();
     }
