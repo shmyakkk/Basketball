@@ -7,6 +7,11 @@ TagManager:
   - DestroySensor
   - CountSensor
   - Ball
+  - Rim
+  - Net
+  - Board
+  - ball
+  - background color
   layers:
   - Default
   - TransparentFX

@@ -6,6 +6,6 @@ public class HoopController : MonoBehaviour
 {
     private void Start()
     {
-        transform.localScale *= GameManager.mod;
+        transform.localScale = new Vector3(1.5f, 1.5f, 1.5f) * GameManager.mod;
     }
 }
