@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
-using DragonBones;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,6 +36,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Color defaultWallColor;
     [SerializeField] private Color defaultBallColor;
 
+    [SerializeField] private AudioSource music;
+    [SerializeField] private Animation musicAnim;
+
     private void Awake()
     {
         mod = Screen.width / (float)Screen.height;
@@ -63,27 +65,7 @@ public class GameManager : MonoBehaviour
         wallMaterial.color = SaveDataManager.Instance.wallColor == Color.gray ? defaultWallColor : SaveDataManager.Instance.wallColor;
         ballMaterial.color = SaveDataManager.Instance.ballColor == new Color(0, 0, 0, 0) ? defaultBallColor : SaveDataManager.Instance.ballColor;
     }
-    public void GoToMenu()
-    {
-        menu.GetComponent<UnityArmatureComponent>().animation.Play("animtion0", 1);
-        Invoke(nameof(SetActiveMenu), 0.7f);
-    }
-    private void SetActiveMenu()
-    {
-        MenuScreen.SetActive(true);
-        StartedScreen.SetActive(false);
-    }
-    public void GoToStartedScreen()
-    {
-        SetColors();
-        close.GetComponent<UnityArmatureComponent>().animation.Play("animtion0", 1);
-        Invoke(nameof(SetActiveStartedScreen), 0.7f);
-    }
-    private void SetActiveStartedScreen()
-    {
-        MenuScreen.SetActive(false);
-        StartedScreen.SetActive(true);
-    }
+
     public void StartGame()
     {
         StartedScreen.SetActive(false);
@@ -127,5 +109,17 @@ public class GameManager : MonoBehaviour
         }
         SaveDataManager.Instance.SaveData();
         SceneManager.LoadScene("Game");
+    }
+    public void SoundIsOn(bool on)
+    {
+        if (on)
+        {
+            music.volume = 1;
+        }
+        else
+        {
+            music.volume = 0;
+           musicAnim.Play("ToOff");
+        }
     }
 }
