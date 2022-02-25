@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    private GameManager gameManagerScript;
+    private GameManager gameManager;
     private Rigidbody ballRb;
     private AudioSource ballAudio;
     [SerializeField] private AudioClip bounce;
@@ -16,7 +16,7 @@ public class BallController : MonoBehaviour
     void Start()
     {
         transform.localScale *= GameManager.mod;
-        gameManagerScript = GameObject.Find("GameScreen").GetComponent<GameManager>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         ballRb = GetComponent<Rigidbody>();
         ballAudio = GetComponent<AudioSource>();
     }
@@ -51,7 +51,7 @@ public class BallController : MonoBehaviour
     {
         if (other.CompareTag("CountSensor"))
         {
-            gameManagerScript.ScoreGame();
+            gameManager.ScoreGame();
             Invoke(nameof(NetClip), 2.0f);
         }
     }
