@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,16 +14,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject timeline;
 
-    [SerializeField] private GameObject best;
+    //[SerializeField] private GameObject best;
 
-    [SerializeField] private GameObject menu;
-    [SerializeField] private GameObject close;
-
-    [SerializeField] private GameObject StartedScreen;
-    [SerializeField] private GameObject GameScreen;
-    [SerializeField] private GameObject MenuScreen;
-
-    [SerializeField] private Material wallMaterial;
     [SerializeField] private Material ballMaterial;
 
     private bool isGameStarted = false;
@@ -33,11 +26,11 @@ public class GameManager : MonoBehaviour
     private int score = 0;
 
     public static float mod;
-    [SerializeField] private Color defaultWallColor;
     [SerializeField] private Color defaultBallColor;
 
     [SerializeField] private AudioSource music;
     [SerializeField] private Animation musicAnim;
+    [SerializeField] private Image musicBG;
 
     private void Awake()
     {
@@ -50,8 +43,8 @@ public class GameManager : MonoBehaviour
 
         if (SaveDataManager.Instance.bestScore > 0)
         {
-            best.SetActive(true);
-            bestScore.text = SaveDataManager.Instance.bestScore.ToString();
+            //best.SetActive(true);
+            bestScore.text = "score "+ SaveDataManager.Instance.bestScore.ToString();
         }
         scoreText.text = "";
         timelineScaleX = timeline.transform.localScale.x / gameTime;
@@ -62,14 +55,11 @@ public class GameManager : MonoBehaviour
     }
     private void SetColors()
     {
-        wallMaterial.color = SaveDataManager.Instance.wallColor == Color.gray ? defaultWallColor : SaveDataManager.Instance.wallColor;
         ballMaterial.color = SaveDataManager.Instance.ballColor == new Color(0, 0, 0, 0) ? defaultBallColor : SaveDataManager.Instance.ballColor;
     }
 
     public void StartGame()
     {
-        StartedScreen.SetActive(false);
-        GameScreen.SetActive(true);
         score = 0;
         isGameStarted = true;
         scoreText.text = score.ToString();
@@ -95,7 +85,6 @@ public class GameManager : MonoBehaviour
             timeline.transform.localScale += Time.deltaTime * timelineScaleX * Vector3.left;
         }
     }
-
     public void ScoreGame()
     {
         score++;
@@ -114,12 +103,15 @@ public class GameManager : MonoBehaviour
     {
         if (on)
         {
-            music.volume = 1;
+            music.mute = false;
+            musicAnim.Play("ToOn");
+            musicBG.color = new Color(1, 1, 1, 1);
         }
         else
         {
-            music.volume = 0;
-           musicAnim.Play("ToOff");
+            music.mute = true;
+            musicAnim.Play("ToOff");
+            musicBG.color = new Color(1, 1, 1, 0.5f);
         }
     }
 }
