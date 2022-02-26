@@ -29,8 +29,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Color defaultBallColor;
 
     [SerializeField] private AudioSource music;
-    [SerializeField] private Animation musicAnim;
-    [SerializeField] private Image musicBG;
+    [SerializeField] private Animation soundAnim;
+    [SerializeField] private Image soundBG;
+
+    [SerializeField] private Animation vibrationAnim;
+    [SerializeField] private Image vibrationBG;
+    private bool VibrationCondition = true;
+    
 
     private void Awake()
     {
@@ -44,7 +49,7 @@ public class GameManager : MonoBehaviour
         if (SaveDataManager.Instance.bestScore > 0)
         {
             //best.SetActive(true);
-            bestScore.text = "score "+ SaveDataManager.Instance.bestScore.ToString();
+            bestScore.text = "score " + SaveDataManager.Instance.bestScore.ToString();
         }
         scoreText.text = "";
         timelineScaleX = timeline.transform.localScale.x / gameTime;
@@ -99,19 +104,41 @@ public class GameManager : MonoBehaviour
         SaveDataManager.Instance.SaveData();
         SceneManager.LoadScene("Game");
     }
-    public void SoundIsOn(bool on)
+    public void SoundControl(bool on)
     {
         if (on)
         {
             music.mute = false;
-            musicAnim.Play("ToOn");
-            musicBG.color = new Color(1, 1, 1, 1);
+            soundAnim.Play("ToOn");
+            soundBG.color = new Color(1, 1, 1, 1);
         }
         else
         {
             music.mute = true;
-            musicAnim.Play("ToOff");
-            musicBG.color = new Color(1, 1, 1, 0.5f);
+            soundAnim.Play("ToOff");
+            soundBG.color = new Color(1, 1, 1, 0.5f);
+        }
+    }
+
+    public void VibrationControl(bool on)
+    {
+        if (on)
+        {
+            vibrationAnim.Play("ToOn");
+            vibrationBG.color = new Color(1, 1, 1, 1);
+        }
+        else
+        {
+            vibrationAnim.Play("ToOff");
+            vibrationBG.color = new Color(1, 1, 1, 0.5f);
+        }
+        VibrationCondition = on;
+    }
+    public void Vibrate()
+    {
+        if (VibrationCondition)
+        {
+            Handheld.Vibrate();
         }
     }
 }

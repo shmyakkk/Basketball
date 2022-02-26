@@ -53,6 +53,7 @@ public class BallController : MonoBehaviour
         {
             gameManager.ScoreGame();
             Invoke(nameof(NetClip), 2.0f);
+            gameManager.Vibrate();
         }
     }
     void NetClip()
@@ -60,4 +61,3 @@ public class BallController : MonoBehaviour
         ballAudio.PlayOneShot(net);
     }
 }
-//все не для нас
