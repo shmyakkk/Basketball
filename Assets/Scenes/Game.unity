@@ -432,6 +432,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 763794550}
   bestScore: {fileID: 1775697373}
+  bonusTextMenu: {fileID: 1120907688}
+  bonusTextGame: {fileID: 1266171756}
   throwsManager: {fileID: 673234692}
   timeline: {fileID: 1455391530}
   music: {fileID: 963194229}
@@ -2004,11 +2006,11 @@ RectTransform:
   m_Father: {fileID: 1353434977}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 213, y: 0}
-  m_SizeDelta: {x: 174, y: 92}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -30, y: 0}
+  m_SizeDelta: {x: 44, y: 130}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1028618513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2078,14 +2080,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0118da997f950264c986379c00bf9858, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81a4805ef3d442f4bbeb105cf8710830, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2190,7 +2192,7 @@ GameObject:
   - component: {fileID: 1120907689}
   - component: {fileID: 1120907688}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Bonus Text Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2342,7 +2344,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bestScore: 0
+  bonus: 0
   itemIndex: 0
+  soundActive: 1
+  vibrationActive: 1
 --- !u!4 &1124892869
 Transform:
   m_ObjectHideFlags: 0
@@ -2539,7 +2544,7 @@ GameObject:
   - component: {fileID: 1266171757}
   - component: {fileID: 1266171756}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Bonus Text Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3258,6 +3263,7 @@ MonoBehaviour:
   items:
   - {fileID: 8544657265996228754, guid: e54a6251dbfdb0343b478be090d3cfb3, type: 3}
   - {fileID: 7059022489407936086, guid: 10abf49704193b149ae13e5138e670a8, type: 3}
+  - {fileID: 2917752498890982507, guid: 2234ac6833740c34687c144ba6d2f8ea, type: 3}
   screenPlace: {fileID: 1913363078}
   NextButton: {fileID: 1028618511}
   PreviousButton: {fileID: 2053198068}
@@ -4787,11 +4793,11 @@ RectTransform:
   m_Father: {fileID: 1353434977}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -213, y: 0}
-  m_SizeDelta: {x: 174, y: 92}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 30, y: 0}
+  m_SizeDelta: {x: 45, y: 131}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2053198070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4861,14 +4867,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0118da997f950264c986379c00bf9858, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 81dfba9795a2acc43bc1ca7bdf70996e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -53,7 +53,11 @@ public class BallController : MonoBehaviour
         {
             gameManager.ScoreGame();
             Invoke(nameof(NetClip), 2.0f);
-            gameManager.Vibrate();
+
+            if (SaveDataManager.Instance.vibrationActive)
+            {
+                Handheld.Vibrate();
+            }
         }
     }
     void NetClip()

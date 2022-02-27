@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI bestScore;
+    [SerializeField] private TextMeshProUGUI bonusTextMenu;
+    [SerializeField] private TextMeshProUGUI bonusTextGame;
 
     [SerializeField] private GameObject throwsManager;
 
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Animation vibrationAnim;
     [SerializeField] private Image vibrationBG;
-    private bool VibrationCondition = true;
+
     
 
     private void Awake()
@@ -44,8 +46,18 @@ public class GameManager : MonoBehaviour
         {
             bestScore.text = "score " + SaveDataManager.Instance.bestScore.ToString();
         }
+        bonusTextMenu.text = SaveDataManager.Instance.bonus.ToString();
+        bonusTextGame.text = SaveDataManager.Instance.bonus.ToString();
+
         scoreText.text = "";
         timelineScaleX = timeline.transform.localScale.x / gameTime;
+
+        if (SaveDataManager.Instance.soundActive) SoundOn();
+        else SoundOff();
+
+        if (SaveDataManager.Instance.vibrationActive) VibrationOn();
+        else VibrationOff();
+
     }
     private void Update()
     {
@@ -83,6 +95,8 @@ public class GameManager : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
+        SaveDataManager.Instance.bonus += 5;
+        bonusTextGame.text = SaveDataManager.Instance.bonus.ToString();
     }
     private void GameOver()
     {
@@ -97,37 +111,52 @@ public class GameManager : MonoBehaviour
     {
         if (on)
         {
-            music.mute = false;
-            soundAnim.Play("ToOn");
-            soundBG.color = new Color(1, 1, 1, 1);
+            SoundOn();
+            SaveDataManager.Instance.soundActive = true;
         }
         else
         {
-            music.mute = true;
-            soundAnim.Play("ToOff");
-            soundBG.color = new Color(1, 1, 1, 0.5f);
+            SoundOff();
+            SaveDataManager.Instance.soundActive = false;
         }
+    }
+    private void SoundOn()
+    {
+        music.mute = false;
+        soundAnim.Play("ToOn");
+        soundBG.color = new Color(1, 1, 1, 1);
+    }
+
+    private void SoundOff()
+    {
+        music.mute = true;
+        soundAnim.Play("ToOff");
+        soundBG.color = new Color(1, 1, 1, 0.5f);
     }
 
     public void VibrationControl(bool on)
     {
         if (on)
         {
-            vibrationAnim.Play("ToOn");
-            vibrationBG.color = new Color(1, 1, 1, 1);
+            VibrationOn();
+            SaveDataManager.Instance.vibrationActive = true;
         }
         else
         {
-            vibrationAnim.Play("ToOff");
-            vibrationBG.color = new Color(1, 1, 1, 0.5f);
+            VibrationOff();
+            SaveDataManager.Instance.vibrationActive = false;
         }
-        VibrationCondition = on;
     }
-    public void Vibrate()
+
+    private void VibrationOn()
     {
-        if (VibrationCondition)
-        {
-            Handheld.Vibrate();
-        }
+        vibrationAnim.Play("ToOn");
+        vibrationBG.color = new Color(1, 1, 1, 1);
+    }
+
+    private void VibrationOff()
+    {
+        vibrationAnim.Play("ToOff");
+        vibrationBG.color = new Color(1, 1, 1, 0.5f);
     }
 }

@@ -8,7 +8,10 @@ public class SaveDataManager : MonoBehaviour
     public static SaveDataManager Instance;
 
     public int bestScore = 0;
+    public int bonus = 0;
     public int itemIndex = 0;
+    public bool soundActive = true;
+    public bool vibrationActive = true;
 
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class SaveDataManager : MonoBehaviour
     class Data
     {
         public int saveBestScore;
+        public int saveBonus;
         public int saveItemIndex;
     }
     public void SaveData()
@@ -31,6 +35,7 @@ public class SaveDataManager : MonoBehaviour
         Data data = new Data
         {
             saveBestScore = bestScore,
+            saveBonus = bonus,
             saveItemIndex = itemIndex
         };
         string json = JsonUtility.ToJson(data);
@@ -47,6 +52,7 @@ public class SaveDataManager : MonoBehaviour
             Data data = JsonUtility.FromJson<Data>(json);
 
             bestScore = data.saveBestScore;
+            bonus = data.saveBonus;
             itemIndex = data.saveItemIndex;
         }
     }
