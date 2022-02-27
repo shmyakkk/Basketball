@@ -24,12 +24,14 @@ public class SaveDataManager : MonoBehaviour
     class Data
     {
         public int saveBestScore;
+        public int saveItemIndex;
     }
     public void SaveData()
     {
         Data data = new Data
         {
             saveBestScore = bestScore,
+            saveItemIndex = itemIndex
         };
         string json = JsonUtility.ToJson(data);
 
@@ -45,6 +47,7 @@ public class SaveDataManager : MonoBehaviour
             Data data = JsonUtility.FromJson<Data>(json);
 
             bestScore = data.saveBestScore;
+            itemIndex = data.saveItemIndex;
         }
     }
 }

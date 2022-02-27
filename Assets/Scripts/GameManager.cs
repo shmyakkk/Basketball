@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     private int score = 0;
 
     public static float mod;
-    [SerializeField] private Color defaultBallColor;
 
     [SerializeField] private AudioSource music;
     [SerializeField] private Animation soundAnim;

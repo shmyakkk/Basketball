@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemsController : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> items;
+    public List<GameObject> items;
     [SerializeField] private GameObject screenPlace;
     private GameObject currentItem;
     private int currentIndex;
@@ -14,11 +14,19 @@ public class ItemsController : MonoBehaviour
 
     private void Start()
     {
-        currentIndex = 0;
+        currentIndex = SaveDataManager.Instance.itemIndex;
         currentItem = Instantiate(items[currentIndex]);
+        currentItem.layer = 5;
         currentItem.transform.SetParent(screenPlace.transform, false);
 
-        PreviousButton.SetActive(false);
+        if (currentIndex == 0)
+        {
+            PreviousButton.SetActive(false);
+        }
+        if(currentIndex == items.Count - 1)
+        {
+            NextButton.SetActive(false);
+        }
     }
     public void NextItem()
     {
@@ -35,6 +43,7 @@ public class ItemsController : MonoBehaviour
         {
             NextButton.SetActive(false);
         }
+        SaveDataManager.Instance.itemIndex = currentIndex;
     }
     public void PreviousItem()
     {
@@ -51,5 +60,6 @@ public class ItemsController : MonoBehaviour
         {
             PreviousButton.SetActive(false);
         }
+        SaveDataManager.Instance.itemIndex = currentIndex;
     }
 }

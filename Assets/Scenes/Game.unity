@@ -434,8 +434,6 @@ MonoBehaviour:
   bestScore: {fileID: 1775697373}
   throwsManager: {fileID: 673234692}
   timeline: {fileID: 1455391530}
-  ballMaterial: {fileID: 2100000, guid: bc851ce54ca96f249b00a5a2957731bc, type: 2}
-  defaultBallColor: {r: 0.80784315, g: 0.2901961, b: 0, a: 1}
   music: {fileID: 963194229}
   soundAnim: {fileID: 1214423426}
   soundBG: {fileID: 1940167272}
@@ -1063,7 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c9d5ca30a17cd4aa287f66ceaa1830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 4090690088000886399, guid: 719e5e14fc182e647abd5b4c4dfaecb4, type: 3}
+  itemsControllerScript: {fileID: 1353434980}
 --- !u!114 &673234695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2340,6 +2338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bestScore: 0
+  itemIndex: 0
 --- !u!4 &1124892869
 Transform:
   m_ObjectHideFlags: 0
@@ -3273,7 +3272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1379285376
 RectTransform:
   m_ObjectHideFlags: 0

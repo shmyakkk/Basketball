@@ -7,13 +7,19 @@ using UnityEditor;
 
 public class ThrowsManager : MonoBehaviour
 {
-    [SerializeField] private GameObject ball;
+    [SerializeField] private ItemsController itemsControllerScript;
+    private GameObject ball;
     private BallController ballControllerScript;
     private Vector3 position;
     private Vector3 touchStartPos;
     private Vector3 touchEndPos;
     private Vector3 touchedPos;
 
+    private void Start()
+    {
+        ball = itemsControllerScript.items[SaveDataManager.Instance.itemIndex];
+        ball.layer = 0;
+    }
     private void Update()
     {
 #if UNITY_EDITOR
