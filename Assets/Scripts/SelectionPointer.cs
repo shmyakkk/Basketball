@@ -10,12 +10,9 @@ public class SelectionPointer : MonoBehaviour
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        if(gameObject.name=="Selected BG")
-        {
-            rectTransform.localPosition = SaveDataManager.Instance.selectedWallPosition == Vector3.zero ? defaultPos : SaveDataManager.Instance.selectedWallPosition;
-        }
         if(gameObject.name=="Selected Ball")
         {
+            
             rectTransform.localPosition = SaveDataManager.Instance.selectedBallPosition == Vector3.zero ? defaultPos : SaveDataManager.Instance.selectedBallPosition;
         }
     }
