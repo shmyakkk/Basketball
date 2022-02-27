@@ -16,6 +16,8 @@ public class ItemsController : MonoBehaviour
     {
         currentIndex = SaveDataManager.Instance.itemIndex;
         currentItem = Instantiate(items[currentIndex]);
+        currentItem.GetComponent<BallController>().enabled = false;
+
         currentItem.layer = 5;
         currentItem.transform.SetParent(screenPlace.transform, false);
 
@@ -34,6 +36,8 @@ public class ItemsController : MonoBehaviour
         {
             Destroy(currentItem);
             currentItem = Instantiate(items[++currentIndex]);
+            currentItem.GetComponent<BallController>().enabled = false;
+
             currentItem.layer = 5;
             currentItem.transform.SetParent(screenPlace.transform, false);
 
@@ -51,6 +55,8 @@ public class ItemsController : MonoBehaviour
         {
             Destroy(currentItem);
             currentItem = Instantiate(items[--currentIndex]);
+            currentItem.GetComponent<BallController>().enabled = false;
+
             currentItem.layer = 5;
             currentItem.transform.SetParent(screenPlace.transform, false);
 
