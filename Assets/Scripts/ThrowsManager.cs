@@ -19,6 +19,7 @@ public class ThrowsManager : MonoBehaviour
     {
         ball = itemsControllerScript.items[SaveDataManager.Instance.itemIndex];
         ball.layer = 0;
+        ball.GetComponent<BallController>().enabled = true;
     }
     private void Update()
     {
