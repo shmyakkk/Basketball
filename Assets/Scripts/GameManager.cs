@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
         if (SaveDataManager.Instance.bestScore > 0)
         {
-            bestScore.text = "score " + SaveDataManager.Instance.bestScore.ToString();
+            bestScore.text = "best " + SaveDataManager.Instance.bestScore.ToString();
         }
         bonusTextMenu.text = SaveDataManager.Instance.bonus.ToString();
         bonusTextGame.text = SaveDataManager.Instance.bonus.ToString();
