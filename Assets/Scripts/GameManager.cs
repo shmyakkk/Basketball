@@ -14,10 +14,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject timeline;
 
-    //[SerializeField] private GameObject best;
-
-    [SerializeField] private Material ballMaterial;
-
     private bool isGameStarted = false;
 
     private int gameTime = 30;
@@ -44,11 +40,9 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         SaveDataManager.Instance.LoadData();
-        SetColors();
 
         if (SaveDataManager.Instance.bestScore > 0)
         {
-            //best.SetActive(true);
             bestScore.text = "score " + SaveDataManager.Instance.bestScore.ToString();
         }
         scoreText.text = "";
@@ -57,10 +51,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         ChangeTimeScale();
-    }
-    private void SetColors()
-    {
-        ballMaterial.color = SaveDataManager.Instance.ballColor == new Color(0, 0, 0, 0) ? defaultBallColor : SaveDataManager.Instance.ballColor;
     }
 
     public void StartGame()
