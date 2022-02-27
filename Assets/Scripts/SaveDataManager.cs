@@ -12,7 +12,6 @@ public class SaveDataManager : MonoBehaviour
     public int itemIndex = 0;
     public bool soundActive = true;
     public bool vibrationActive = true;
-    public bool[] avaibleItems = new bool[3] { false, false, false };
 
     private void Awake()
     {
@@ -30,7 +29,6 @@ public class SaveDataManager : MonoBehaviour
         public int saveBestScore;
         public int saveBonus;
         public int saveItemIndex;
-        public bool[] saveAvaibleItems;
     }
     public void SaveData()
     {
@@ -38,8 +36,7 @@ public class SaveDataManager : MonoBehaviour
         {
             saveBestScore = bestScore,
             saveBonus = bonus,
-            saveItemIndex = itemIndex,
-            saveAvaibleItems = avaibleItems
+            saveItemIndex = itemIndex
         };
         string json = JsonUtility.ToJson(data);
 
@@ -57,7 +54,6 @@ public class SaveDataManager : MonoBehaviour
             bestScore = data.saveBestScore;
             bonus = data.saveBonus;
             itemIndex = data.saveItemIndex;
-            avaibleItems = data.saveAvaibleItems;
         }
     }
 }

@@ -83,14 +83,21 @@ public class ItemsController : MonoBehaviour
 
     private void SetItemsProperty()
     {
+        Debug.Log(itemsProperty.Count);
         int price = 0;
+        bool avaible;
         for (int i = 0; i < items.Count; i++)
         {
-            bool avaible = SaveDataManager.Instance.avaibleItems[i];
+            if (i == 0)
+            {
+                avaible = true;
+            }
+            else
+            {
+                avaible = false;
+            }
             ItemProperty itemProperty = new ItemProperty(price, avaible);
-
             itemsProperty.Add(itemProperty);
-
             price += 50;
         }
     }
