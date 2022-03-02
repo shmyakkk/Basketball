@@ -97,14 +97,21 @@ public class ItemsController : MonoBehaviour
     private void SetItemsProperty() ////
     {
         int price = 0;
-        bool avaible;
+        bool avaible = false;
 
         bool[] a = new bool[items.Count];
         SaveDataManager.Instance.itemsAvaible.CopyTo(a, 0);
 
         for (int i = 0; i < items.Count; i++)
         {
-            avaible = a[i];
+            if (SaveDataManager.Instance.itemsAvaible != null)
+            {
+                avaible = a[i];
+            }
+            if (i == 0)
+            {
+                avaible = true;
+            }
             ItemProperty itemProperty = new ItemProperty(price, avaible);
             itemsProperty.Add(itemProperty);
             price += 50;
@@ -146,6 +153,8 @@ public class ItemsController : MonoBehaviour
             }
             SaveDataManager.Instance.itemsAvaible = new bool[itemsProperty.Count];
             a.CopyTo(SaveDataManager.Instance.itemsAvaible, 0);
+
+            SaveDataManager.Instance.itemIndex = currentIndex;
         }
     }
 }

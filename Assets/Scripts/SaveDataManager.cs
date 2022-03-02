@@ -31,7 +31,7 @@ public class SaveDataManager : MonoBehaviour
     class Data
     {
         public int saveBestScore;
-        public int saveBonus = 104;
+        public int saveBonus;
         public int saveItemIndex;
         public bool[] saveItemsAvaible;
     }
