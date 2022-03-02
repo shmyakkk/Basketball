@@ -7,11 +7,15 @@ public class SaveDataManager : MonoBehaviour
 {
     public static SaveDataManager Instance;
 
-    public int bestScore = 0;
-    public int bonus = 0;
-    public int itemIndex = 0;
-    public bool soundActive = true;
-    public bool vibrationActive = true;
+    public int bestScore = 0; //рекорд забитых м€чей
+    public int bonus = 0; //кол-во накопленных монет
+
+    public int itemIndex = 0; //выбранный м€ч
+
+    public bool soundActive = true; //включен ли звук
+    public bool vibrationActive = true; //включена ли вибраци€
+
+    public bool[] itemsAvaible; //доступен или недоступен м€ч
 
     private void Awake()
     {
@@ -27,8 +31,9 @@ public class SaveDataManager : MonoBehaviour
     class Data
     {
         public int saveBestScore;
-        public int saveBonus;
+        public int saveBonus = 104;
         public int saveItemIndex;
+        public bool[] saveItemsAvaible;
     }
     public void SaveData()
     {
@@ -36,7 +41,8 @@ public class SaveDataManager : MonoBehaviour
         {
             saveBestScore = bestScore,
             saveBonus = bonus,
-            saveItemIndex = itemIndex
+            saveItemIndex = itemIndex,
+            saveItemsAvaible = itemsAvaible
         };
         string json = JsonUtility.ToJson(data);
 
@@ -54,6 +60,7 @@ public class SaveDataManager : MonoBehaviour
             bestScore = data.saveBestScore;
             bonus = data.saveBonus;
             itemIndex = data.saveItemIndex;
+            itemsAvaible = data.saveItemsAvaible;
         }
     }
 }

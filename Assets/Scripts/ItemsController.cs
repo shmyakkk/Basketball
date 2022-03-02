@@ -16,9 +16,15 @@ public class ItemsController : MonoBehaviour
     [SerializeField] private GameObject PreviousButton;
 
     [SerializeField] private TextMeshProUGUI priceText;
+    [SerializeField] private GameObject blockImage;
+    [SerializeField] private GameObject payButton;
+
+    [SerializeField] private TextMeshProUGUI bonusTextPay;
 
     private void Start()
     {
+        bonusTextPay.text = SaveDataManager.Instance.bonus.ToString();
+
         SetItemsProperty();
 
         currentIndex = SaveDataManager.Instance.itemIndex;
@@ -57,7 +63,10 @@ public class ItemsController : MonoBehaviour
         {
             NextButton.SetActive(false);
         }
-        SaveDataManager.Instance.itemIndex = currentIndex;
+        if (itemsProperty[currentIndex].Avaible)
+        {
+            SaveDataManager.Instance.itemIndex = currentIndex;
+        }
         ShowProperty();
     }
     public void PreviousItem()
@@ -77,25 +86,25 @@ public class ItemsController : MonoBehaviour
         {
             PreviousButton.SetActive(false);
         }
-        SaveDataManager.Instance.itemIndex = currentIndex;
+        if (itemsProperty[currentIndex].Avaible)
+        {
+            SaveDataManager.Instance.itemIndex = currentIndex;
+
+        }
         ShowProperty();
     }
 
-    private void SetItemsProperty()
+    private void SetItemsProperty() ////
     {
-        Debug.Log(itemsProperty.Count);
         int price = 0;
         bool avaible;
+
+        bool[] a = new bool[items.Count];
+        SaveDataManager.Instance.itemsAvaible.CopyTo(a, 0);
+
         for (int i = 0; i < items.Count; i++)
         {
-            if (i == 0)
-            {
-                avaible = true;
-            }
-            else
-            {
-                avaible = false;
-            }
+            avaible = a[i];
             ItemProperty itemProperty = new ItemProperty(price, avaible);
             itemsProperty.Add(itemProperty);
             price += 50;
@@ -107,10 +116,36 @@ public class ItemsController : MonoBehaviour
         if (!itemsProperty[currentIndex].Avaible)
         {
             priceText.text = itemsProperty[currentIndex].Price.ToString();
+            blockImage.SetActive(true);
+            payButton.SetActive(true);
         }
         else
         {
             priceText.text = "";
+            blockImage.SetActive(false);
+            payButton.SetActive(false);
+        }
+    }
+
+    public void PayItem()
+    {
+        if (SaveDataManager.Instance.bonus >= itemsProperty[currentIndex].Price)
+        {
+            SaveDataManager.Instance.bonus -= itemsProperty[currentIndex].Price;
+            bonusTextPay.text = SaveDataManager.Instance.bonus.ToString();
+
+            itemsProperty[currentIndex].Avaible = true;
+            priceText.text = "";
+            blockImage.SetActive(false);
+            payButton.SetActive(false);
+
+            bool[] a = new bool[items.Count];
+            for (int i = 0; i < items.Count; i++)
+            {
+                a[i] = itemsProperty[i].Avaible;
+            }
+            SaveDataManager.Instance.itemsAvaible = new bool[itemsProperty.Count];
+            a.CopyTo(SaveDataManager.Instance.itemsAvaible, 0);
         }
     }
 }
