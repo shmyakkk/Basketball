@@ -7,14 +7,27 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject gameOverScreen;
+
+    [SerializeField] private TextMeshProUGUI showTimeText;
+    [SerializeField] private TextMeshProUGUI currentScoreText;
+    [SerializeField] private TextMeshProUGUI currentBonusText;
+
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI bestScore;
-    [SerializeField] private TextMeshProUGUI bonusTextMenu;
-    [SerializeField] private TextMeshProUGUI bonusTextGame;
+
+    [SerializeField] private TextMeshProUGUI bonusText;
 
     [SerializeField] private GameObject throwsManager;
 
     [SerializeField] private GameObject timeline;
+
+    [SerializeField] private AudioSource music;
+    [SerializeField] private Animation soundAnim;
+    [SerializeField] private Image soundBG;
+
+    [SerializeField] private Animation vibrationAnim;
+    [SerializeField] private Image vibrationBG;
 
     private bool isGameStarted = false;
 
@@ -25,14 +38,11 @@ public class GameManager : MonoBehaviour
 
     public static float mod;
 
-    [SerializeField] private AudioSource music;
-    [SerializeField] private Animation soundAnim;
-    [SerializeField] private Image soundBG;
+    private int time = 5;
+    private bool adStarted = false;
 
-    [SerializeField] private Animation vibrationAnim;
-    [SerializeField] private Image vibrationBG;
-
-    
+    public int Score { get => score; set => score = value; }
+    public bool AdStarted { get => adStarted; set => adStarted = value; }
 
     private void Awake()
     {
@@ -46,8 +56,8 @@ public class GameManager : MonoBehaviour
         {
             bestScore.text = "best " + SaveDataManager.Instance.bestScore.ToString();
         }
-        bonusTextMenu.text = SaveDataManager.Instance.bonus.ToString();
-        bonusTextGame.text = SaveDataManager.Instance.bonus.ToString();
+
+        ChangeBonusValue();
 
         scoreText.text = "";
         timelineScaleX = timeline.transform.localScale.x / gameTime;
@@ -61,7 +71,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        ChangeTimeScale();
+        ChangeTimeScale(); 
     }
 
     public void StartGame()
@@ -84,6 +94,12 @@ public class GameManager : MonoBehaviour
             GameOver();
         }
     }
+
+    public void ChangeBonusValue()
+    {
+        bonusText.text = SaveDataManager.Instance.Bonus.ToString();
+    }
+
     private void ChangeTimeScale()
     {
         if (isGameStarted && timeline.transform.localScale.x > 0)
@@ -95,8 +111,9 @@ public class GameManager : MonoBehaviour
     {
         score++;
         scoreText.text = score.ToString();
-        SaveDataManager.Instance.bonus += 5;
-        bonusTextGame.text = SaveDataManager.Instance.bonus.ToString();
+        SaveDataManager.Instance.Bonus += 5;
+
+        ChangeBonusValue();
     }
     private void GameOver()
     {
@@ -105,8 +122,38 @@ public class GameManager : MonoBehaviour
             SaveDataManager.Instance.bestScore = score;
         }
         SaveDataManager.Instance.SaveData();
+
+        StartCoroutine(ShowGameOverScreen());
+    }
+
+    IEnumerator ShowGameOverScreen()
+    {
+        gameOverScreen.SetActive(true);
+        currentScoreText.text = score.ToString();
+        currentBonusText.text = "( " + (score * 10).ToString() + "      )";
+
+        while (time >= 0)
+        {
+            yield return new WaitForSeconds(1);
+
+            showTimeText.text = time.ToString();
+
+            if (!adStarted)
+            {
+                time--;
+            }
+        }
+        if (time == -1)
+        {
+            RestartGame();
+        }
+    }
+
+    public void RestartGame()
+    {
         SceneManager.LoadScene("Game");
     }
+
     public void SoundControl(bool on)
     {
         if (on)

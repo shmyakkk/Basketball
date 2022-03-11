@@ -8,7 +8,7 @@ public class SaveDataManager : MonoBehaviour
     public static SaveDataManager Instance;
 
     public int bestScore = 0; //рекорд забитых мячей
-    public int bonus = 0; //кол-во накопленных монет
+    private int bonus = 0; //кол-во накопленных монет
 
     public int itemIndex = 0; //выбранный мяч
 
@@ -16,6 +16,8 @@ public class SaveDataManager : MonoBehaviour
     public bool vibrationActive = true; //включена ли вибрация
 
     public bool[] itemsAvaible; //доступен или недоступен мяч
+
+    public int Bonus { get => bonus; set => bonus = value; }
 
     private void Awake()
     {

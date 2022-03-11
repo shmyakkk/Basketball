@@ -7,10 +7,10 @@ using TMPro;
 public class AdsManager : MonoBehaviour, IUnityAdsListener
 {
     private string gameID = "4639637";
-    [SerializeField] private TextMeshProUGUI bonusOption;
-    [SerializeField] private TextMeshProUGUI bonusMenu;
-    [SerializeField] private TextMeshProUGUI bonusGame;
 
+    [SerializeField] GameManager gameManager;
+
+    private int addedBonus;
 
     private void Start()
     {
@@ -18,15 +18,19 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         Advertisement.AddListener(this);
     }
 
-    public void PlayRewardedAd()
+    public void PlayRewardedVideoAddBonus()
     {
-        if (Advertisement.IsReady("rewardedVideo"))
+        if (Advertisement.IsReady("rewardedVideoAddBonus"))
         {
-            Advertisement.Show("rewardedVideo");
+            Advertisement.Show("rewardedVideoAddBonus");
         }
-        else
+    }
+
+    public void PlayRewardedVideoDoubleBonus()
+    {
+        if (Advertisement.IsReady("rewardedVideoDoubleBonus"))
         {
-            Debug.Log("Rewarded ad is not ready!");
+            Advertisement.Show("rewardedVideoDoubleBonus");
         }
     }
 
@@ -43,18 +47,28 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     public void OnUnityAdsDidStart(string placementId)
     {
         Debug.Log("VIDEO STARTED");
+        gameManager.AdStarted = true;
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
     {
-        if(placementId=="rewardedVideo" && showResult == ShowResult.Finished)
-        {
-            SaveDataManager.Instance.bonus += 100;
-            Debug.Log(SaveDataManager.Instance.bonus);
-            bonusGame.text = SaveDataManager.Instance.bonus.ToString();
-            bonusOption.text = SaveDataManager.Instance.bonus.ToString();
-            bonusMenu.text = SaveDataManager.Instance.bonus.ToString();
+        gameManager.AdStarted = false;
 
+        if (showResult == ShowResult.Finished)
+        {
+            if(placementId == "rewardedVideoAddBonus")
+            {
+                SaveDataManager.Instance.Bonus += 50;
+            }
+
+            if (placementId == "rewardedVideoDoubleBonus")
+            {
+                SaveDataManager.Instance.Bonus += gameManager.Score * 2;
+            }
+
+            gameManager.ChangeBonusValue();
+
+            SaveDataManager.Instance.SaveData();
         }
     }
 }

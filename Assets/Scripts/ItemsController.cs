@@ -5,6 +5,8 @@ using TMPro;
 
 public class ItemsController : MonoBehaviour
 {
+    private GameManager gameManager;
+
     public List<GameObject> items;
     private List<ItemProperty> itemsProperty = new List<ItemProperty>(100);
 
@@ -19,11 +21,12 @@ public class ItemsController : MonoBehaviour
     [SerializeField] private GameObject blockImage;
     [SerializeField] private GameObject payButton;
 
-    [SerializeField] private TextMeshProUGUI bonusTextPay;
 
     private void Start()
     {
-        bonusTextPay.text = SaveDataManager.Instance.bonus.ToString();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        gameManager.ChangeBonusValue();
 
         SetItemsProperty();
 
@@ -68,6 +71,8 @@ public class ItemsController : MonoBehaviour
             SaveDataManager.Instance.itemIndex = currentIndex;
         }
         ShowProperty();
+
+        SaveDataManager.Instance.SaveData();
     }
     public void PreviousItem()
     {
@@ -92,9 +97,11 @@ public class ItemsController : MonoBehaviour
 
         }
         ShowProperty();
+
+        SaveDataManager.Instance.SaveData();
     }
 
-    private void SetItemsProperty() ////
+    private void SetItemsProperty() 
     {
         int price = 0;
         bool avaible = false;
@@ -136,10 +143,11 @@ public class ItemsController : MonoBehaviour
 
     public void PayItem()
     {
-        if (SaveDataManager.Instance.bonus >= itemsProperty[currentIndex].Price)
+        if (SaveDataManager.Instance.Bonus >= itemsProperty[currentIndex].Price)
         {
-            SaveDataManager.Instance.bonus -= itemsProperty[currentIndex].Price;
-            bonusTextPay.text = SaveDataManager.Instance.bonus.ToString();
+            SaveDataManager.Instance.Bonus -= itemsProperty[currentIndex].Price;
+
+            gameManager.ChangeBonusValue();
 
             itemsProperty[currentIndex].Avaible = true;
             priceText.text = "";
@@ -155,6 +163,8 @@ public class ItemsController : MonoBehaviour
             a.CopyTo(SaveDataManager.Instance.itemsAvaible, 0);
 
             SaveDataManager.Instance.itemIndex = currentIndex;
+
+            SaveDataManager.Instance.SaveData();
         }
     }
 }

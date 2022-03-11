@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153ec3054bd2a6c419ad59c236ea2c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounce: {fileID: 0}
-  rim: {fileID: 0}
-  net: {fileID: 0}
-  board: {fileID: 0}
+  bounce: {fileID: 8300000, guid: 9c792575243ff944e97ca8ceb7fbc5b7, type: 3}
+  rim: {fileID: 8300000, guid: e7e21c1bcf537a34ebb8327d4cca322d, type: 3}
+  net: {fileID: 8300000, guid: 453b9775ccedc464e803ee763f3c13d5, type: 3}
+  board: {fileID: 8300000, guid: e16ba5a64a9ddb94e94fd1a3f843daed, type: 3}
