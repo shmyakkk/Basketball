@@ -59,11 +59,13 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             if(placementId == "rewardedVideoAddBonus")
             {
                 SaveDataManager.Instance.Bonus += 50;
+                Debug.Log(50);
             }
 
             if (placementId == "rewardedVideoDoubleBonus")
             {
-                SaveDataManager.Instance.Bonus += gameManager.Score * 2;
+                SaveDataManager.Instance.Bonus += (gameManager.Score * 5);
+                Debug.Log(2);
             }
 
             gameManager.ChangeBonusValue();

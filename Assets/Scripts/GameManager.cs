@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     public static float mod;
 
-    private int time = 5;
+    private int time = 10;
     private bool adStarted = false;
 
     public int Score { get => score; set => score = value; }
@@ -129,8 +129,11 @@ public class GameManager : MonoBehaviour
     IEnumerator ShowGameOverScreen()
     {
         gameOverScreen.SetActive(true);
+
+        GameObject.Find("Throws Manager").SetActive(false);
+
         currentScoreText.text = score.ToString();
-        currentBonusText.text = "( " + (score * 10).ToString() + "      )";
+        currentBonusText.text = "( " + (score * 5).ToString() + "      )";
 
         while (time >= 0)
         {
