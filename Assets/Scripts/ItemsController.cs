@@ -119,6 +119,15 @@ public class ItemsController : MonoBehaviour
             {
                 avaible = true;
             }
+            switch (i)
+            {
+                case 8:
+                    price = 2000;
+                    break;
+                default:
+                    break;
+            }
+
             ItemProperty itemProperty = new ItemProperty(price, avaible);
             itemsProperty.Add(itemProperty);
             price += 50;

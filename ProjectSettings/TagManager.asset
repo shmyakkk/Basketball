@@ -12,6 +12,7 @@ TagManager:
   - Board
   - ball
   - background color
+  - SpecialItem
   layers:
   - Default
   - TransparentFX
