@@ -22,6 +22,8 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     {
         if (Advertisement.IsReady("rewardedVideoAddBonus"))
         {
+            SaveDataManager.Instance.Bonus += 50;
+
             Advertisement.Show("rewardedVideoAddBonus");
         }
     }
@@ -30,6 +32,8 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     {
         if (Advertisement.IsReady("rewardedVideoDoubleBonus"))
         {
+            SaveDataManager.Instance.Bonus += (gameManager.Score * 5);
+
             Advertisement.Show("rewardedVideoDoubleBonus");
         }
     }
@@ -56,18 +60,6 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
 
         if (showResult == ShowResult.Finished)
         {
-            if(placementId == "rewardedVideoAddBonus")
-            {
-                SaveDataManager.Instance.Bonus += 50;
-                Debug.Log(50);
-            }
-
-            if (placementId == "rewardedVideoDoubleBonus")
-            {
-                SaveDataManager.Instance.Bonus += (gameManager.Score * 5);
-                Debug.Log(2);
-            }
-
             gameManager.ChangeBonusValue();
 
             SaveDataManager.Instance.SaveData();

@@ -124,13 +124,16 @@ public class ItemsController : MonoBehaviour
                 case 8:
                     price = 2000;
                     break;
+                case 9:
+                    price = 2000;
+                    break;
                 default:
+                    price = i * 50;
                     break;
             }
 
             ItemProperty itemProperty = new ItemProperty(price, avaible);
             itemsProperty.Add(itemProperty);
-            price += 50;
         }
     }
 
